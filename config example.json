@@ -1,0 +1,7 @@
+{
+  "prefix": "PREFIX",
+  "stdError": "No can do",
+  "waitMessage": "Hang on",
+  "me": "USERID_OF_ONLY_AUTHORIZED_USER",
+  "cooldownMs": 3000
+}
