@@ -11,7 +11,11 @@ let commands = {};
 const directoryPath = path.join("./", "commands");
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.DIRECT_MESSAGES,
+  ],
 });
 
 const prefix = config.prefix;
@@ -36,7 +40,7 @@ client.on("ready", () => {
 });
 
 // Listen for message
-client.on("message", async (msg) => {
+client.on("messageCreate", async (msg) => {
   // Check if author of message is authorized to do shtuff
   if (msg.author.id === config.me) {
     // Check if message has bot's prefix
