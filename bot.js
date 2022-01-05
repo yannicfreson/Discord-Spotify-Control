@@ -35,8 +35,11 @@ client.on("ready", () => {
   });
 });
 
+// Listen for message
 client.on("message", async (msg) => {
+  // Check if author of message is authorized to do shtuff
   if (msg.author.id === config.me) {
+    // Check if message has bot's prefix
     if (msg.content.substring(0, prefix.length) === prefix) {
       let args = msg.content.substring(prefix.length).split(" ");
       args.shift();
@@ -45,6 +48,7 @@ client.on("message", async (msg) => {
   }
 });
 
+// Process the message by dynamically calling the correct function
 async function processMsg(msg, args) {
   if (args[0] !== null) {
     let cmd = args[0];
