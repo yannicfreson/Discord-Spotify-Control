@@ -4,7 +4,7 @@ const fetch = require("node-fetch");
 let spotify = require("../spotify");
 
 module.exports = {
-  playingurlFunc: function playingurl(msg, args) {
+  purlFunc: function purl(msg, args) {
     spotify("/me/player/currently-playing").then((data) => {
       try {
         msg.channel.send(`${data.item.external_urls.spotify}`);

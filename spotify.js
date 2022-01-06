@@ -16,6 +16,7 @@ let SCOPES = [
   "user-read-private",
   "user-read-email",
   "user-read-currently-playing",
+  "user-modify-playback-state",
 ].join(" ");
 let CLIENT_ID = auth.CLIENT_ID;
 let CLIENT_SECRET = auth.CLIENT_SECRET;
@@ -121,12 +122,24 @@ async function getToken() {
     });
 }
 
-module.exports = function spotify(endpoint) {
-  return getToken().then((token) => {
-    return fetch(`https://api.spotify.com/v1${endpoint}`, {
-      headers: {
-        Authorization: token,
-      },
-    }).then((response) => response.json());
-  });
+module.exports = function spotify(endpoint, type) {
+  if (type === "POST") {
+    return getToken().then((token) => {
+      return fetch(`https://api.spotify.com/v1${endpoint}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: token,
+        },
+      }).then((response) => response.text());
+    });
+  } else {
+    return getToken().then((token) => {
+      return fetch(`https://api.spotify.com/v1${endpoint}`, {
+        headers: {
+          Authorization: token,
+        },
+      }).then((response) => response.json());
+    });
+  }
 };

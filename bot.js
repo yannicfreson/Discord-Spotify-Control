@@ -17,6 +17,7 @@ const client = new Client({
     Intents.FLAGS.GUILD_MESSAGES,
     Intents.FLAGS.DIRECT_MESSAGES,
   ],
+  partials: ["CHANNEL"],
 });
 
 const prefix = config.prefix;
