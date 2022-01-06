@@ -23,7 +23,15 @@ module.exports = {
 
           const embed = new MessageEmbed()
             .setColor(accentColor)
-            .setTitle(`${data.item.name} by ${data.item.artists[0].name}`)
+            .setTitle(
+              `${data.item.name
+                .replace(" - Radio Edit", "")
+                .replace(" - Remix", "")
+                .replace(" (Original Mix)", "")} by ${
+                data.item.artists[0].name
+              }`
+            )
+            //.setURL(data.item.external_urls.spotify)
             .addFields(
               {
                 name: "Release date",

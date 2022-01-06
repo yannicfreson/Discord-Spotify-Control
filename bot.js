@@ -50,6 +50,11 @@ client.on("messageCreate", async (msg) => {
       let args = msg.content.substring(prefix.length).split(" ");
       args.shift();
       processMsg(msg, args);
+      try {
+        msg.delete();
+      } catch {
+        //console.log("Probably in a DM");
+      }
     }
   }
 });

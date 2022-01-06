@@ -8,7 +8,7 @@ module.exports = {
     spotify("/me/player/currently-playing").then((data) => {
       try {
         msg.channel.send(`${data.item.external_urls.spotify}`);
-        console.dir(data, { depth: null });
+        //console.dir(data, { depth: null });
       } catch {
         msg.channel.send(config.stdError);
       }

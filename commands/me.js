@@ -8,7 +8,7 @@ module.exports = {
   meFunc: function me(msg, args) {
     try {
       spotify("/me").then((data) => {
-        console.log(data);
+        //console.log(data);
         const embed = new MessageEmbed()
 
           .setTitle(`${data.display_name}`)
