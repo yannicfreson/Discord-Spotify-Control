@@ -2,6 +2,7 @@
 const { Client, Intents } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
+const fetch = require("node-fetch");
 
 // import variables
 const auth = require("./auth.json");
@@ -22,7 +23,7 @@ const prefix = config.prefix;
 
 let available = true;
 
-client.login(auth.token);
+client.login(auth.TOKEN);
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}`);
@@ -55,12 +56,8 @@ client.on("messageCreate", async (msg) => {
 // Process the message by dynamically calling the correct function
 async function processMsg(msg, args) {
   if (args[0] !== null) {
-    let cmd = args[0];
-    try {
-      commands[cmd](msg, args);
-    } catch {
-      msg.channel.send(config.stdError);
-    }
+    let cmd = args[0].toLowerCase();
+    commands[cmd](msg, args);
   }
 
   setStatus();

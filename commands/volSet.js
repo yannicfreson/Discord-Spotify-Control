@@ -8,7 +8,7 @@ module.exports = {
       msg.channel.send(`Volume set to ${args[1]}%`);
       exec(`nircmd setsysvolume ${(65535 / 100) * args[1]}`);
     } catch {
-      console.log(config.stdError);
+      msg.channel.send(config.stdError);
     }
   },
 };

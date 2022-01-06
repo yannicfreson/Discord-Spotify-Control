@@ -6,7 +6,7 @@ module.exports = {
     try {
       msg.channel.send("Pong");
     } catch {
-      console.log(config.stdError);
+      msg.channel.send(config.stdError);
     }
   },
 };
