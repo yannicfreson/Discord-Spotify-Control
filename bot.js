@@ -44,7 +44,7 @@ client.on("ready", () => {
 // Listen for message
 client.on("messageCreate", async (msg) => {
   // Check if author of message is authorized to do shtuff
-  if (msg.author.id === config.me) {
+  if (msg.author.id === config.me || msg.author.id === config.bot) {
     // Check if message has bot's prefix
     if (
       msg.content.substring(0, prefix.length).toLowerCase() ===
