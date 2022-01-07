@@ -15,7 +15,9 @@ module.exports = {
           spotify("/me/player/shuffle?state=true", "PUT");
           spotify("/me/player/next", "POST");
           spotify("/me/player/shuffle?state=false", "PUT");
-          msg.channel.send(`${config.prefix} p`);
+          setTimeout(() => {
+            msg.channel.send(`${config.prefix} p`);
+          }, 1000);
         } catch {
           msg.channel.send(config.stdError);
         }

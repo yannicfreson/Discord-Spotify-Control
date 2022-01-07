@@ -56,6 +56,9 @@ client.on("messageCreate", async (msg) => {
       if (msg.channel.type !== "DM" || msg.guild !== null) {
         msg.delete();
       }
+      if (msg.author.id === config.bot) {
+        msg.delete();
+      }
     }
   }
 });
