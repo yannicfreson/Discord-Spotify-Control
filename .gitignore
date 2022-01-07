@@ -2,3 +2,4 @@ node_modules
 auth.json
 config.json
 very-secure-refresh-token.txt
+temp.txt

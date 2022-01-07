@@ -1,6 +1,7 @@
 {
   "prefix": "PREFIX",
   "stdError": "No can do",
+  "reqError": "Error in request",
   "waitMessage": "Hang on",
   "me": "DISCORD_USERID_OF_ONLY_AUTHORIZED_USER",
   "bot": "DISCORD_USERID_OF_BOT_ITSELF",
