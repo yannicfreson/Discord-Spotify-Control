@@ -50,10 +50,8 @@ client.on("messageCreate", async (msg) => {
       let args = msg.content.substring(prefix.length).split(" ");
       args.shift();
       processMsg(msg, args);
-      try {
+      if (msg.channel.type !== "DM" || msg.guild !== null) {
         msg.delete();
-      } catch {
-        //console.log("Probably in a DM");
       }
     }
   }
