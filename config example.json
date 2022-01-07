@@ -2,6 +2,7 @@
   "prefix": "PREFIX",
   "stdError": "No can do",
   "waitMessage": "Hang on",
-  "me": "USERID_OF_ONLY_AUTHORIZED_USER",
+  "me": "DISCORD_USERID_OF_ONLY_AUTHORIZED_USER",
+  "bot": "DISCORD_USERID_OF_BOT_ITSELF",
   "cooldownMs": 3000
 }
