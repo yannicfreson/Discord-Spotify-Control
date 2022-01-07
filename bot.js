@@ -46,7 +46,10 @@ client.on("messageCreate", async (msg) => {
   // Check if author of message is authorized to do shtuff
   if (msg.author.id === config.me) {
     // Check if message has bot's prefix
-    if (msg.content.substring(0, prefix.length) === prefix) {
+    if (
+      msg.content.substring(0, prefix.length).toLowerCase() ===
+      prefix.toLowerCase()
+    ) {
       let args = msg.content.substring(prefix.length).split(" ");
       args.shift();
       processMsg(msg, args);
@@ -61,7 +64,9 @@ client.on("messageCreate", async (msg) => {
 async function processMsg(msg, args) {
   if (args[0] !== null) {
     let cmd = args[0].toLowerCase();
-    commands[cmd](msg, args);
+    try {
+      commands[cmd](msg, args);
+    } catch {}
   }
 
   setStatus();

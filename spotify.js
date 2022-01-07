@@ -122,24 +122,44 @@ async function getToken() {
     });
 }
 
-module.exports = function spotify(endpoint, type) {
-  if (type === "POST") {
+module.exports = function spotify(endpoint, type, data) {
+  if (data !== undefined && endpoint === "/me/player/play") {
+    let context_uri = data.split(" ")[0];
     return getToken().then((token) => {
       return fetch(`https://api.spotify.com/v1${endpoint}`, {
-        method: "POST",
+        method: type,
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           Authorization: token,
         },
-      }).then((response) => response.text());
+        body: `{\n"context_uri": "${context_uri}",\n"offset":{\n"position":0\n}\n}`,
+      }).then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else if (response.status === 204) {
+          return response.text();
+        } else {
+          return "Request_Error";
+        }
+      });
     });
   } else {
     return getToken().then((token) => {
       return fetch(`https://api.spotify.com/v1${endpoint}`, {
+        method: type,
         headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
           Authorization: token,
         },
-      }).then((response) => response.json());
+      }).then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else if (response.status === 204) {
+          return response.text();
+        } else {
+          return "Request_Error";
+        }
+      });
     });
   }
 };

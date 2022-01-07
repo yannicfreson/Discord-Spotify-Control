@@ -3,10 +3,10 @@ const config = require("../config.json");
 const { exec } = require("child_process");
 
 module.exports = {
-  volSetFunc: function vol(msg, args) {
+  vFunc: function v(msg, args) {
     try {
-      msg.channel.send(`Volume set to ${args[1]}%`);
-      exec(`nircmd setsysvolume ${(65535 / 100) * args[1]}`);
+      msg.channel.send(`Volume changed by ${args[1]}%`);
+      exec(`nircmd changesysvolume ${(65535 / 100) * args[1]}`);
     } catch {
       msg.channel.send(config.stdError);
     }

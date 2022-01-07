@@ -5,12 +5,16 @@ let spotify = require("../spotify");
 
 module.exports = {
   prevFunc: function prev(msg, args) {
-    try {
-      spotify("/me/player/previous", "POST").then((data) => {
-        msg.channel.send("Playing previous song ...");
-      });
-    } catch {
-      msg.channel.send(config.stdError);
-    }
+    spotify("/me/player/previous", "POST").then((data) => {
+      if (data !== "Request_Error") {
+        try {
+          msg.channel.send("Playing previous song ...");
+        } catch {
+          msg.channel.send(config.stdError);
+        }
+      } else {
+        msg.channel.send(config.reqError);
+      }
+    });
   },
 };
