@@ -1,1 +1,1 @@
-A discord bot to control pc audio volume and Spotify
+A Discord bot to control pc audio volume and Spotify
