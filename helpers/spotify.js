@@ -1,6 +1,6 @@
 let fs = require("fs");
 let path = require("path");
-const auth = require("./auth.json");
+const auth = require("../auth.json");
 
 let fetch = require("node-fetch");
 let express = require("express");
@@ -8,6 +8,7 @@ let express = require("express");
 let PORT = process.env.PORT || 3000;
 let REFRESH_TOKEN_PATH = path.resolve(
   __dirname,
+  "../",
   "very-secure-refresh-token.txt"
 );
 

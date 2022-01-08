@@ -1,7 +1,7 @@
 // import variables
 const config = require("../config.json");
 const { MessageEmbed } = require("discord.js");
-const spotify = require("../spotify");
+const spotify = require("../helpers/spotify");
 const Vibrant = require("node-vibrant");
 
 function millisToMinutesAndSeconds(millis) {

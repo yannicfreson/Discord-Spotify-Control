@@ -1,6 +1,6 @@
 // import variables
 const config = require("../config.json");
-const spotify = require("../spotify");
+const spotify = require("../helpers/spotify");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {

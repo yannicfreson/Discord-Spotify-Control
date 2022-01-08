@@ -2,7 +2,7 @@
 const config = require("../config.json");
 let fs = require("fs");
 let path = require("path");
-let spotify = require("../spotify");
+const spotify = require("../helpers/spotify");
 let TEMP_PATH = path.resolve(__dirname, "../", "temp.txt");
 
 module.exports = {

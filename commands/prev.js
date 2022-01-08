@@ -1,6 +1,6 @@
 // import variables
 const config = require("../config.json");
-let spotify = require("../spotify");
+const spotify = require("../helpers/spotify");
 
 module.exports = {
   prevFunc: function prev(msg, args) {
