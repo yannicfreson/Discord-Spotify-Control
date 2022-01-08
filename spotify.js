@@ -1,7 +1,6 @@
 let fs = require("fs");
 let path = require("path");
 const auth = require("./auth.json");
-const config = require("./config.json");
 
 let fetch = require("node-fetch");
 let express = require("express");

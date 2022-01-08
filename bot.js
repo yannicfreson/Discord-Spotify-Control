@@ -2,7 +2,6 @@
 const { Client, Intents } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
-const fetch = require("node-fetch");
 
 // import variables
 const auth = require("./auth.json");

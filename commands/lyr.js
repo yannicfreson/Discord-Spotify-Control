@@ -1,11 +1,6 @@
 // import variables
 const config = require("../config.json");
-const fetch = require("node-fetch");
 const spotify = require("../spotify");
-const nodeHtmlParser = require("node-html-parser");
-let fs = require("fs");
-let path = require("path");
-let TEMP_PATH = path.resolve(__dirname, "../", "output.txt");
 let lyricsSearcher = require("lyrics-searcher");
 const { MessageEmbed } = require("discord.js");
 
@@ -25,14 +20,6 @@ module.exports = {
               .toLowerCase()}`
           )
             .then((lyrics) => {
-              msg.channel.send(
-                `**Lyrics for ${data.item.name
-                  .replace(" - Radio Edit", "")
-                  .replace(" - Remix", "")
-                  .replace(" (Original Mix)", "")
-                  .replace("(", "")
-                  .replace(")", "")} by ${data.item.artists[0].name}**`
-              );
               if (lyrics.length < config.MAX_LYRIC_LENGTH_PER_EMBED) {
                 const embed = new MessageEmbed()
                   .setColor("#000000")
@@ -98,7 +85,7 @@ module.exports = {
               }
             })
             .catch((error) => {
-              console.error(error);
+              msg.channel.send(config.lyrError);
             });
         } catch {
           msg.channel.send(config.stdError);

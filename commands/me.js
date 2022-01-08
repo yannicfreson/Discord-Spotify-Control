@@ -1,6 +1,5 @@
 // import variables
 const config = require("../config.json");
-const fetch = require("node-fetch");
 const spotify = require("../spotify");
 const { MessageEmbed } = require("discord.js");
 

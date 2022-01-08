@@ -1,6 +1,5 @@
 // import variables
 const config = require("../config.json");
-const fetch = require("node-fetch");
 let fs = require("fs");
 let path = require("path");
 let spotify = require("../spotify");
