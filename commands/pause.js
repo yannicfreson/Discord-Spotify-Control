@@ -1,9 +1,8 @@
-// import variables
 const config = require("../config.json");
-let fs = require("fs");
-let path = require("path");
+const fs = require("fs");
+const path = require("path");
 const spotify = require("../helpers/spotify");
-let TEMP_PATH = path.resolve(__dirname, "../", "temp.txt");
+const TEMP_PATH = path.resolve(__dirname, "../", "temp.txt");
 
 module.exports = {
   pauseFunc: function pause(msg, args) {

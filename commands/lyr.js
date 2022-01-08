@@ -1,7 +1,6 @@
-// import variables
 const config = require("../config.json");
 const spotify = require("../helpers/spotify");
-let lyricsSearcher = require("lyrics-searcher");
+const lyricsSearcher = require("lyrics-searcher");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {

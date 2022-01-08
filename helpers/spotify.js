@@ -1,27 +1,27 @@
-let fs = require("fs");
-let path = require("path");
+const fs = require("fs");
+const path = require("path");
 const auth = require("../auth.json");
 
-let fetch = require("node-fetch");
-let express = require("express");
+const fetch = require("node-fetch");
+const express = require("express");
 
-let PORT = process.env.PORT || 3000;
-let REFRESH_TOKEN_PATH = path.resolve(
+const PORT = process.env.PORT || 3000;
+const REFRESH_TOKEN_PATH = path.resolve(
   __dirname,
   "../",
   "very-secure-refresh-token.txt"
 );
 
-let SCOPES = [
+const SCOPES = [
   "user-read-private",
   "user-read-email",
   "user-read-currently-playing",
   "user-modify-playback-state",
 ].join(" ");
-let CLIENT_ID = auth.CLIENT_ID;
-let CLIENT_SECRET = auth.CLIENT_SECRET;
+const CLIENT_ID = auth.CLIENT_ID;
+const CLIENT_SECRET = auth.CLIENT_SECRET;
 
-let cache = new Map();
+const cache = new Map();
 
 function setupSpotify(resolve) {
   let app = express();
