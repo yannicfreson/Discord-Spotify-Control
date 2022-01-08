@@ -123,7 +123,11 @@ async function getToken() {
 }
 
 module.exports = function spotify(endpoint, type, data) {
-  if (data !== undefined && endpoint === "/me/player/play") {
+  if (
+    data !== undefined &&
+    endpoint ===
+      "/me/player/play?device_id=5b21680fddd005d05441c762ac9d14c8862d051e"
+  ) {
     let context_uri = data.split(" ")[0];
     return getToken().then((token) => {
       return fetch(`https://api.spotify.com/v1${endpoint}`, {
