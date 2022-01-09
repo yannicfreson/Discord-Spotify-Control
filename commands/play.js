@@ -16,6 +16,7 @@ module.exports = {
       if (data !== "Request_Error") {
         try {
           exec(`nircmd mutesysvolume 0`);
+          spotify("/me/player/volume?volume_percent=100", "PUT");
           spotify("/me/player/shuffle?state=true", "PUT");
           spotify("/me/player/next", "POST");
           spotify("/me/player/shuffle?state=false", "PUT");
