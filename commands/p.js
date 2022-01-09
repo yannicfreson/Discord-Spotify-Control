@@ -24,10 +24,7 @@ module.exports = {
               .setTitle(
                 `${data.item.name
                   .replace(" - Radio Edit", "")
-                  .replace(" - Remix", "")
-                  .replace(" (Original Mix)", "")} by ${
-                  data.item.artists[0].name
-                }`
+                  .replace(" - Remix", "")} by ${data.item.artists[0].name}`
               )
               .addFields(
                 {
