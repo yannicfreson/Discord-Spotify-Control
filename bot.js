@@ -8,6 +8,7 @@ const auth = require("./auth.json");
 const config = require("./config.json");
 
 let commands = {};
+let commandsList = [];
 const directoryPath = path.join("./", "commands");
 
 const client = new Client({
@@ -36,6 +37,7 @@ client.on("ready", () => {
       let func = require(`./commands/${file}`);
       commands[`${file.slice(0, -3).toLowerCase()}`] =
         func[`${file.slice(0, -3)}Func`];
+      commandsList.push(file.slice(0, -3).toLowerCase());
     });
   });
 });
@@ -66,6 +68,13 @@ client.on("messageCreate", async (msg) => {
 async function processMsg(msg, args) {
   if (args[0] !== null) {
     let cmd = args[0].toLowerCase();
+    if (cmd === "h" || cmd === "help") {
+      let out = "";
+      commandsList.forEach((c) => {
+        out += `**- ${c.toUpperCase()}**\n${commands[c](msg, args, true)}\n`;
+      });
+      msg.channel.send(out);
+    }
     try {
       commands[cmd](msg, args);
     } catch {}

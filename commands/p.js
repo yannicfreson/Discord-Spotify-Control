@@ -10,52 +10,56 @@ function millisToMinutesAndSeconds(millis) {
 }
 
 module.exports = {
-  pFunc: function p(msg, args) {
-    spotify("/me/player/currently-playing").then((data) => {
-      if (data !== "Request_Error") {
-        try {
-          let accentColor;
-          let vibrant = new Vibrant(data.item.album.images[0].url);
-          vibrant.getPalette().then((palette) => {
-            accentColor = palette.Vibrant.hex;
+  pFunc: function p(msg, args, description) {
+    if (!description) {
+      spotify("/me/player/currently-playing").then((data) => {
+        if (data !== "Request_Error") {
+          try {
+            let accentColor;
+            let vibrant = new Vibrant(data.item.album.images[0].url);
+            vibrant.getPalette().then((palette) => {
+              accentColor = palette.Vibrant.hex;
 
-            const embed = new MessageEmbed()
-              .setColor(accentColor)
-              .setTitle(
-                `${data.item.name
-                  .replace(" - Radio Edit", "")
-                  .replace(" - Remix", "")} by ${data.item.artists[0].name}`
-              )
-              .addFields(
-                {
-                  name: "Release date",
-                  value: data.item.album.release_date,
-                  inline: true,
-                },
-                {
-                  name: "Album",
-                  value: data.item.album.name,
-                  inline: true,
-                },
-                {
-                  name: "Duration",
-                  value: `${millisToMinutesAndSeconds(
-                    data.progress_ms
-                  )} / ${millisToMinutesAndSeconds(data.item.duration_ms)}`,
-                  inline: true,
-                }
-              )
-              .setImage(data.item.album.images[0].url)
-              .setTimestamp();
+              const embed = new MessageEmbed()
+                .setColor(accentColor)
+                .setTitle(
+                  `${data.item.name
+                    .replace(" - Radio Edit", "")
+                    .replace(" - Remix", "")} by ${data.item.artists[0].name}`
+                )
+                .addFields(
+                  {
+                    name: "Release date",
+                    value: data.item.album.release_date,
+                    inline: true,
+                  },
+                  {
+                    name: "Album",
+                    value: data.item.album.name,
+                    inline: true,
+                  },
+                  {
+                    name: "Duration",
+                    value: `${millisToMinutesAndSeconds(
+                      data.progress_ms
+                    )} / ${millisToMinutesAndSeconds(data.item.duration_ms)}`,
+                    inline: true,
+                  }
+                )
+                .setImage(data.item.album.images[0].url)
+                .setTimestamp();
 
-            msg.channel.send({ embeds: [embed] });
-          });
-        } catch {
-          msg.channel.send(config.stdError);
+              msg.channel.send({ embeds: [embed] });
+            });
+          } catch {
+            msg.channel.send(config.stdError);
+          }
+        } else {
+          msg.channel.send(config.reqError);
         }
-      } else {
-        msg.channel.send(config.reqError);
-      }
-    });
+      });
+    } else {
+      return "Shows info about the currently playing song";
+    }
   },
 };
