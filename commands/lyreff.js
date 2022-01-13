@@ -2,9 +2,9 @@ const config = require("../config.json");
 const spotify = require("../helpers/spotify");
 const lyricsSearcher = require("lyrics-searcher");
 const Image = require("ascii-art-image");
-
 const fs = require("fs");
 const path = require("path");
+
 const outPath = path.resolve(__dirname, "../", "tempImage", "out.txt");
 
 module.exports = {
@@ -28,8 +28,8 @@ module.exports = {
               var image = new Image({
                 filepath: "./tempImage/test.png",
                 alphabet: "greyscale",
-                width: 400,
-                height: 400,
+                width: 1000,
+                height: 1000,
               });
 
               image.write(function (err, rendered) {
