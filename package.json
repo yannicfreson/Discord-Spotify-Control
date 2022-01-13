@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "ascii-art": "^2.8.5",
-    "discord.js": "^13.5.0",
+    "canvas": "^2.8.0",
+    "discord.js": "^13.5.1",
     "express": "^4.17.2",
     "lyrics-searcher": "^1.0.58",
     "node-fetch": "2.6.1",
