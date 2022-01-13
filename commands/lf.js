@@ -4,9 +4,10 @@ const lyricsSearcher = require("lyrics-searcher");
 const Image = require("ascii-art-image");
 const fs = require("fs");
 const path = require("path");
-const { createCanvas, loadImage } = require("canvas");
+const { createCanvas, registerFont } = require("canvas");
 const http = require("http");
 const https = require("https");
+registerFont("FiraCode-Regular.ttf", { family: "Fira Code" });
 
 var Stream = require("stream").Transform;
 
@@ -61,7 +62,7 @@ module.exports = {
             )
               .then((lyrics) => {
                 try {
-                  let lyricsLetters = lyrics.toUpperCase().split("");
+                  let lyricsLetters = lyrics.split("");
 
                   var image = new Image({
                     filepath: "./tempImage/asciiArtInput.png",
