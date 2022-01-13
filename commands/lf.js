@@ -58,80 +58,84 @@ module.exports = {
                 .replace("(", "")
                 .replace(")", "")
                 .toLowerCase()}`
-            ).then((lyrics) => {
-              try {
-                let lyricsLetters = lyrics.toUpperCase().split("");
+            )
+              .then((lyrics) => {
+                try {
+                  let lyricsLetters = lyrics.toUpperCase().split("");
 
-                var image = new Image({
-                  filepath: "./tempImage/asciiArtInput.png",
-                  alphabet: "greyscale",
-                  width: 400,
-                  height: 400,
-                });
-
-                image.write(function (err, rendered) {
-                  let output = "";
-                  let asciiArtString = rendered.replace(
-                    /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
-                    ""
-                  );
-
-                  let asciiArtStringLetters = asciiArtString.split("");
-                  let backgroundCharsLength = 0;
-                  asciiArtString.split("").forEach((c) => {
-                    if (/* c === "░" || */ c === " ") {
-                      backgroundCharsLength++;
-                    }
+                  var image = new Image({
+                    filepath: "./tempImage/asciiArtInput.png",
+                    alphabet: "greyscale",
+                    width: 400,
+                    height: 400,
                   });
 
-                  lyricsCharPointer = 0;
-                  lyricsForBackgroundString = "";
-                  for (let i = 0; i < backgroundCharsLength; i++) {
-                    if (lyricsCharPointer < lyricsLetters.length) {
-                      lyricsForBackgroundString +=
-                        lyricsLetters[lyricsCharPointer];
-                      lyricsCharPointer++;
-                    } else {
-                      lyricsForBackgroundString += lyricsLetters[i];
-                      lyricsCharPointer = 0;
+                  image.write(function (err, rendered) {
+                    let output = "";
+                    let asciiArtString = rendered.replace(
+                      /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g,
+                      ""
+                    );
+
+                    let asciiArtStringLetters = asciiArtString.split("");
+                    let backgroundCharsLength = 0;
+                    asciiArtString.split("").forEach((c) => {
+                      if (/* c === "░" || */ c === " ") {
+                        backgroundCharsLength++;
+                      }
+                    });
+
+                    lyricsCharPointer = 0;
+                    lyricsForBackgroundString = "";
+                    for (let i = 0; i < backgroundCharsLength; i++) {
+                      if (lyricsCharPointer < lyricsLetters.length) {
+                        lyricsForBackgroundString +=
+                          lyricsLetters[lyricsCharPointer];
+                        lyricsCharPointer++;
+                      } else {
+                        lyricsForBackgroundString += lyricsLetters[i];
+                        lyricsCharPointer = 0;
+                      }
                     }
-                  }
 
-                  let lyricsForBackgroundStringSanitized =
-                    lyricsForBackgroundString.replace(/(\r\n|\n|\r)/gm, " ");
+                    let lyricsForBackgroundStringSanitized =
+                      lyricsForBackgroundString.replace(/(\r\n|\n|\r)/gm, " ");
 
-                  let lyricsForBackgroundStringIndex = 0;
-                  for (let i = 0; i < asciiArtStringLetters.length; i++) {
-                    if (
-                      /* asciiArtStringLetters[i] === "░" || */
-                      asciiArtStringLetters[i] === " "
-                    ) {
-                      output +=
-                        lyricsForBackgroundStringSanitized[
-                          lyricsForBackgroundStringIndex
-                        ];
-                      lyricsForBackgroundStringIndex++;
-                    } else {
-                      output += asciiArtStringLetters[i];
+                    let lyricsForBackgroundStringIndex = 0;
+                    for (let i = 0; i < asciiArtStringLetters.length; i++) {
+                      if (
+                        /* asciiArtStringLetters[i] === "░" || */
+                        asciiArtStringLetters[i] === " "
+                      ) {
+                        output +=
+                          lyricsForBackgroundStringSanitized[
+                            lyricsForBackgroundStringIndex
+                          ];
+                        lyricsForBackgroundStringIndex++;
+                      } else {
+                        output += asciiArtStringLetters[i];
+                      }
                     }
-                  }
 
-                  ctx.font = "16px Fira Code";
-                  ctx.fillStyle = "black";
-                  ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-                  ctx.fillStyle = "white";
-                  ctx.fillText(output, 0, 14);
+                    ctx.font = "16px Fira Code";
+                    ctx.fillStyle = "black";
+                    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                    ctx.fillStyle = "white";
+                    ctx.fillText(output, 0, 14);
 
-                  const buffer = canvas.toBuffer("image/png");
-                  fs.writeFileSync(outPath, buffer);
-                  msg.channel.send({
-                    files: [outPath],
+                    const buffer = canvas.toBuffer("image/png");
+                    fs.writeFileSync(outPath, buffer);
+                    msg.channel.send({
+                      files: [outPath],
+                    });
                   });
-                });
-              } catch {
+                } catch {
+                  msg.channel.send(config.lyrError);
+                }
+              })
+              .catch((error) => {
                 msg.channel.send(config.lyrError);
-              }
-            });
+              });
           } catch {
             msg.channel.send(config.stdError);
           }
