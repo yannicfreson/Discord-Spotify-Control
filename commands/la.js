@@ -14,8 +14,8 @@ var Stream = require("stream").Transform;
 const outPath = path.resolve(__dirname, "../", "tempImage", "out.png");
 const outPathAsciiArt = path.resolve(__dirname, "../", "tempImage", "out.txt");
 
-const canvasWidth = 4000;
-const canvasHeight = 4000;
+const canvasWidth = 3500;
+const canvasHeight = 3500;
 const canvas = createCanvas(canvasWidth, canvasHeight);
 const ctx = canvas.getContext("2d");
 
@@ -121,8 +121,10 @@ module.exports = {
                     ctx.font = "16px Fira Code";
                     ctx.fillStyle = "black";
                     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-                    ctx.fillStyle = "white";
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
                     ctx.fillText(output, 0, 14);
+                    ctx.fillStyle = "rgba(255, 255, 255, 1)";
+                    ctx.fillText(asciiArtString, 0, 14);
 
                     const buffer = canvas.toBuffer("image/png");
                     fs.writeFileSync(outPath, buffer);
