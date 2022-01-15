@@ -67,8 +67,8 @@ module.exports = {
                   var image = new Image({
                     filepath: "./tempImage/asciiArtInput.png",
                     alphabet: "greyscale",
-                    width: 400,
-                    height: 400,
+                    width: 350,
+                    height: 350,
                   });
 
                   image.write(function (err, rendered) {

@@ -17,13 +17,17 @@ module.exports = {
         if (data !== "Request_Error") {
           try {
             exec(`nircmd mutesysvolume 0`);
-            spotify("/me/player/volume?volume_percent=100", "PUT");
-            spotify("/me/player/shuffle?state=true", "PUT");
-            spotify("/me/player/next", "POST");
-            spotify("/me/player/shuffle?state=false", "PUT");
+            spotify("/me/player/volume?volume_percent=0", "PUT").then(() => {
+              spotify("/me/player/shuffle?state=true", "PUT").then(() => {
+                spotify("/me/player/next", "POST").then(() => {
+                  spotify("/me/player/volume?volume_percent=100", "PUT");
+                });
+              });
+            });
+
             setTimeout(() => {
               msg.channel.send(`${config.prefix} p`);
-            }, 1000);
+            }, 2000);
           } catch {
             msg.channel.send(config.stdError);
           }
