@@ -4,7 +4,7 @@ const lyricsSearcher = require("lyrics-searcher");
 const { MessageEmbed } = require("discord.js");
 
 module.exports = {
-  lyrFunc: function lyr(msg, args, description) {
+  lFunc: function l(msg, args, description) {
     if (!description) {
       spotify("/me/player/currently-playing").then((data) => {
         if (data !== "Request_Error") {

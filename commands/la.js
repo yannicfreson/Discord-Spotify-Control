@@ -20,7 +20,7 @@ const canvas = createCanvas(canvasWidth, canvasHeight);
 const ctx = canvas.getContext("2d");
 
 module.exports = {
-  lfFunc: function lf(msg, args, description) {
+  laFunc: function la(msg, args, description) {
     if (!description) {
       spotify("/me/player/currently-playing").then((data) => {
         if (data !== "Request_Error") {
