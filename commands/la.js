@@ -103,7 +103,7 @@ module.exports = {
                       lyricsForBackgroundString.replace(/(\r\n|\n|\r)/gm, " ");
 
                     let lyricsForBackgroundStringIndex = 0;
-                    for (let i = 0; i < asciiArtStringLetters.length; i++) {
+                    for (let i = 0; i < asciiArtStringLetters.length - 1; i++) {
                       if (
                         /* asciiArtStringLetters[i] === "░" || */
                         asciiArtStringLetters[i] === " "
