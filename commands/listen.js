@@ -71,7 +71,7 @@ module.exports = {
                         },
                         {
                           name: "Duration",
-                          value: `0:00 / ${millisToMinutesAndSeconds(
+                          value: `${millisToMinutesAndSeconds(
                             data.item.duration_ms
                           )}`,
                           inline: true,
